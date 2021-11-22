@@ -1,5 +1,12 @@
+import Column from './components/Column/Column';
+import ColumnsWrapper from './components/ColumnsWrapper/ColumnsWrapper';
+
 const App: React.FC = () => {
-    return <h1>DnD APP</h1>;
+    return (
+        <ColumnsWrapper>
+            <Column />
+        </ColumnsWrapper>
+    );
 };
 
 export default App;

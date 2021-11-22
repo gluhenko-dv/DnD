@@ -1,0 +1,19 @@
+.column {
+  height: 100%;
+  min-height: 400px;
+  width: 300px;
+  background-color: darkgrey;
+
+  &-header {
+    padding: 10px;
+    background-color: rgb(197, 197, 197);
+  }
+
+  &-title {
+    font-size: 16px;
+  }
+
+  &-wrapper {
+    padding: 10px;
+  }
+}
