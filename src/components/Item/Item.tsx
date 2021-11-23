@@ -1,19 +1,17 @@
 import { Draggable } from 'react-beautiful-dnd';
+import { ITaskItem } from '../../interfaces/interfaces';
 import './Item.styles.scss';
 
-interface IItemProps {
-    title: string;
+interface IItemProps extends ITaskItem {
     index: number;
 }
 
-const Item: React.FC<IItemProps> = ({ title, index }) => {
+const Item: React.FC<IItemProps> = ({ id, title, index }) => {
     return (
-        <Draggable draggableId={'draggable' + index} index={index}>
-            {(provided, snapshot) => (
-                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                    <div className="item">
-                        <span>{title}</span>
-                    </div>
+        <Draggable draggableId={'draggable' + id} index={index}>
+            {(provided) => (
+                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="item">
+                    <span>{title}</span>
                 </div>
             )}
         </Draggable>
