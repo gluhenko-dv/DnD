@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
     return (
         <ColumnsWrapper data={data} setData={setData}>
-            <Column data={data} />
+            <Column data={data} setData={setData} />
         </ColumnsWrapper>
     );
 };
