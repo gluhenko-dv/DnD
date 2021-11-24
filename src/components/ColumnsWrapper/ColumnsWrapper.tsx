@@ -16,7 +16,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const ColumnsWrapper: React.FC<PropsFromRedux> = ({ updateBoardData, children }) => {
     const onDragEnd = useCallback((result) => {
         const { destination, source } = result;
-        console.log(result);
 
         const data: IBoardData[] = localStorage.boardData ? JSON.parse(localStorage.boardData) : [];
 

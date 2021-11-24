@@ -1,0 +1,8 @@
+.column-title {
+  padding: 5px;
+
+  &:focus {
+    background: white;
+    outline: none;
+  }
+}

@@ -4,6 +4,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import { IBoardData } from '../../interfaces/interfaces';
 import { deleteBoardItem } from '../../store/Board/BoardSlice';
 import { RootState } from '../../store/rootReducer';
+import ColumnTitle from '../ColumnTitle/ColumnTitle';
 import Item from '../Item/Item';
 import ItemAddBtn from '../ItemAddBtn/ItemAddBtn';
 import './Column.styles.scss';
@@ -27,7 +28,7 @@ const Column: React.FC<PropsFromRedux> = ({ board, deleteBoardItem }) => {
             {board.data.map(({ id, title, items }, i) => (
                 <div className="column" key={id}>
                     <div className="column-header">
-                        <span className="column-title">{title}</span>
+                        <ColumnTitle title={title} index={i} />
                         <button onClick={removeColumn} data-index={i}>
                             удалить
                         </button>
