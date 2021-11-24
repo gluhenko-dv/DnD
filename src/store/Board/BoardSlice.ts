@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IBoardData, ReduxStatus } from '../../interfaces/interfaces';
+import { IBoardData, ReduxStatus } from 'interfaces/interfaces';
 
 type NewsState = ReduxStatus & {
     data: IBoardData[];

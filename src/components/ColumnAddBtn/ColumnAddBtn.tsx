@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { dateNow, getBoardData } from '../../helpers/helpers';
-import { updateBoardData } from '../../store/Board/BoardSlice';
+import { dateNow, getBoardData } from 'helpers/helpers';
+import { updateBoardData } from 'store/Board/BoardSlice';
 import './ColumnAddBtn.styles.scss';
 
 const mapDispatchToProps = {
