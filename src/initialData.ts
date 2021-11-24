@@ -1,4 +1,4 @@
-export const initialData = [
+export const initialBoardData = [
     {
         id: 0,
         title: 'title0',
@@ -88,5 +88,5 @@ export const initialData = [
                 title: 'item2'
             }
         ]
-    },
+    }
 ];

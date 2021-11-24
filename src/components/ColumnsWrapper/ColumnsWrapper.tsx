@@ -1,18 +1,26 @@
-import './ColumnsWrapper.styles.scss';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useCallback } from 'react';
-import { ITasksData } from '../../interfaces/interfaces';
+import { RootState } from '../../store/rootReducer';
+import { connect, ConnectedProps } from 'react-redux';
+import { updateBoardData } from '../../store/Board/BoardSlice';
+import './ColumnsWrapper.styles.scss';
+import { IBoardData } from '../../interfaces/interfaces';
 
-interface IColumnsWrapperProps {
-    data: ITasksData[];
-    setData: (data: ITasksData[]) => void;
-}
+const mapStateToProps = ({ board }: RootState) => ({ board });
 
-const ColumnsWrapper: React.FC<IColumnsWrapperProps> = ({ children, setData, data }) => {
+const mapDispatchToProps = {
+    updateBoardData
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const ColumnsWrapper: React.FC<PropsFromRedux> = ({ updateBoardData, children }) => {
     const onDragEnd = useCallback((result) => {
         const { destination, source } = result;
+        const data: IBoardData[] = localStorage.boardData ? JSON.parse(localStorage.boardData) : [];
 
-        if (!destination) {
+        if (!destination || data.length === 0) {
             return;
         }
         if (destination.droppableId === source.droppableId && destination.index === source.index) {
@@ -27,7 +35,7 @@ const ColumnsWrapper: React.FC<IColumnsWrapperProps> = ({ children, setData, dat
         currentBoard.items.splice(source.index, 1);
         dropBoard.items.splice(dropItem, 0, currentItem);
 
-        setData(
+        updateBoardData(
             data.map((board) => {
                 if (board.id === dropBoard.id) {
                     return dropBoard;
@@ -38,7 +46,6 @@ const ColumnsWrapper: React.FC<IColumnsWrapperProps> = ({ children, setData, dat
                 return board;
             })
         );
-        localStorage.startArr = JSON.stringify(data);
     }, []);
 
     return (
@@ -48,4 +55,4 @@ const ColumnsWrapper: React.FC<IColumnsWrapperProps> = ({ children, setData, dat
     );
 };
 
-export default ColumnsWrapper;
+export default connector(ColumnsWrapper);

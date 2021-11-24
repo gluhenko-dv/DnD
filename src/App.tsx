@@ -1,25 +1,30 @@
 import { useEffect, useState } from 'react';
 import Column from './components/Column/Column';
 import ColumnsWrapper from './components/ColumnsWrapper/ColumnsWrapper';
-import { ITasksData } from './interfaces/interfaces';
-import { initialData } from './initialData';
+import { initialBoardData } from './initialData';
+import { Provider } from 'react-redux';
+import { useStore } from './store/store';
 
 const App: React.FC = () => {
-    const [data, setData] = useState<ITasksData[]>(localStorage.startArr ? JSON.parse(localStorage.startArr) : initialData);
+    const store = useStore({
+        board: { status: 'idle', error: null, data: localStorage.boardData ? JSON.parse(localStorage.boardData) : initialBoardData }
+    });
 
     useEffect(() => {
         //@ts-ignore
         window['__react-beautiful-dnd-disable-dev-warnings'] = true;
 
-        if (!localStorage.startArr) {
-            localStorage.startArr = JSON.stringify(initialData);
+        if (!localStorage.boardData) {
+            localStorage.boardData = JSON.stringify(initialBoardData);
         }
     }, []);
 
     return (
-        <ColumnsWrapper data={data} setData={setData}>
-            <Column data={data} setData={setData} />
-        </ColumnsWrapper>
+        <Provider store={store}>
+            <ColumnsWrapper>
+                <Column />
+            </ColumnsWrapper>
+        </Provider>
     );
 };
 

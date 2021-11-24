@@ -1,24 +1,29 @@
 import { useCallback } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import { ITasksData } from '../../interfaces/interfaces';
+import { connect, ConnectedProps } from 'react-redux';
+import { IBoardData } from '../../interfaces/interfaces';
+import { deleteBoardItem } from '../../store/Board/BoardSlice';
+import { RootState } from '../../store/rootReducer';
 import Item from '../Item/Item';
 import './Column.styles.scss';
 
-interface IColumnProps {
-    data: ITasksData[];
-    setData: (data: ITasksData[]) => void;
-}
+const mapStateToProps = ({ board }: RootState) => ({ board });
 
-const Column: React.FC<IColumnProps> = ({ data, setData }) => {
+const mapDispatchToProps = {
+    deleteBoardItem
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Column: React.FC<PropsFromRedux> = ({ board, deleteBoardItem }) => {
     const removeColumn = useCallback((e) => {
-        data.splice(e.target.dataset.index, 1);
-        localStorage.startArr = JSON.stringify(data);
-        setData(JSON.parse(localStorage.startArr));
+        deleteBoardItem(e.target.dataset.index);
     }, []);
 
     return (
         <>
-            {data.map(({ id, title, items }, i) => (
+            {board.data.map(({ id, title, items }, i) => (
                 <div className="column" key={id}>
                     <div className="column-header">
                         <span className="column-title">{title}</span>
@@ -48,4 +53,4 @@ const Column: React.FC<IColumnProps> = ({ data, setData }) => {
     );
 };
 
-export default Column;
+export default connector(Column);

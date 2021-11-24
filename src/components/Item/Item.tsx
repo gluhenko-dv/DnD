@@ -1,8 +1,8 @@
 import { Draggable } from 'react-beautiful-dnd';
-import { ITaskItem } from '../../interfaces/interfaces';
+import { initialBoardItem } from '../../interfaces/interfaces';
 import './Item.styles.scss';
 
-interface IItemProps extends ITaskItem {
+interface IItemProps extends initialBoardItem {
     index: number;
 }
 
