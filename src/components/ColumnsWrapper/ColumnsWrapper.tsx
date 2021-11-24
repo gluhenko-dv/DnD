@@ -1,23 +1,23 @@
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useCallback } from 'react';
-import { RootState } from '../../store/rootReducer';
 import { connect, ConnectedProps } from 'react-redux';
 import { updateBoardData } from '../../store/Board/BoardSlice';
 import './ColumnsWrapper.styles.scss';
 import { IBoardData } from '../../interfaces/interfaces';
-
-const mapStateToProps = ({ board }: RootState) => ({ board });
+import ColumnAddBtn from '../ColumnAddBtn/ColumnAddBtn';
 
 const mapDispatchToProps = {
     updateBoardData
 };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const ColumnsWrapper: React.FC<PropsFromRedux> = ({ updateBoardData, children }) => {
     const onDragEnd = useCallback((result) => {
         const { destination, source } = result;
+        console.log(result);
+
         const data: IBoardData[] = localStorage.boardData ? JSON.parse(localStorage.boardData) : [];
 
         if (!destination || data.length === 0) {
@@ -50,7 +50,10 @@ const ColumnsWrapper: React.FC<PropsFromRedux> = ({ updateBoardData, children })
 
     return (
         <div className="columns">
-            <DragDropContext onDragEnd={onDragEnd}>{children}</DragDropContext>
+            <DragDropContext onDragEnd={onDragEnd}>
+                {children}
+                <ColumnAddBtn />
+            </DragDropContext>
         </div>
     );
 };

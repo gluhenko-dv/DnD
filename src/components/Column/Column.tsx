@@ -31,7 +31,7 @@ const Column: React.FC<PropsFromRedux> = ({ board, deleteBoardItem }) => {
                             удалить
                         </button>
                     </div>
-                    <Droppable droppableId={`${id}`}>
+                    <Droppable droppableId={`${i}`}>
                         {(provided, snapshot) => (
                             <div
                                 className="column-wrapper"

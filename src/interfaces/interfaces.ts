@@ -10,10 +10,10 @@ export type ReduxStatus = {
 export interface IBoardData {
     id: number;
     title: string;
-    items: initialBoardItem[];
+    items: IBoardItem[];
 }
 
-export interface initialBoardItem {
+export interface IBoardItem {
     id: number;
     title: string;
 }
