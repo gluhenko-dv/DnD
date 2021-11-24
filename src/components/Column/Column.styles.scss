@@ -28,4 +28,13 @@
     padding: 10px;
     min-height: 60px;
   }
+
+  &-title {
+    padding: 5px;
+
+    &:focus {
+      background: white;
+      outline: none;
+    }
+  }
 }

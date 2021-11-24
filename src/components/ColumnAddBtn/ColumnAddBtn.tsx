@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { dateNow } from '../../helpers/helpers';
-import { IBoardData } from '../../interfaces/interfaces';
+import { dateNow, getBoardData } from '../../helpers/helpers';
 import { updateBoardData } from '../../store/Board/BoardSlice';
 import './ColumnAddBtn.styles.scss';
 
@@ -14,7 +13,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const ColumnAddBtn: React.FC<PropsFromRedux> = ({ updateBoardData }) => {
     const onClick = useCallback(() => {
-        const data: IBoardData[] = localStorage.boardData ? JSON.parse(localStorage.boardData) : [];
+        const data = getBoardData();
 
         data.splice(data.length, 0, {
             id: dateNow(),

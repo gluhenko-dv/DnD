@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { connect, ConnectedProps } from 'react-redux';
-import { IBoardData } from '../../interfaces/interfaces';
 import { deleteBoardItem } from '../../store/Board/BoardSlice';
 import { RootState } from '../../store/rootReducer';
-import ColumnTitle from '../ColumnTitle/ColumnTitle';
+import EditTitle from '../EditTitle/EditTitle';
 import Item from '../Item/Item';
 import ItemAddBtn from '../ItemAddBtn/ItemAddBtn';
 import './Column.styles.scss';
@@ -25,28 +24,27 @@ const Column: React.FC<PropsFromRedux> = ({ board, deleteBoardItem }) => {
 
     return (
         <>
-            {board.data.map(({ id, title, items }, i) => (
+            {board.data.map(({ id, title, items }, columnIndex) => (
                 <div className="column" key={id}>
                     <div className="column-header">
-                        <ColumnTitle title={title} index={i} />
-                        <button onClick={removeColumn} data-index={i}>
+                        <EditTitle className="column-title" title={title} index={columnIndex} />
+                        <button onClick={removeColumn} data-index={columnIndex}>
                             удалить
                         </button>
                     </div>
-                    <Droppable droppableId={`${i}`}>
+                    <Droppable droppableId={`${columnIndex}`}>
                         {(provided, snapshot) => (
                             <div
                                 className="column-wrapper"
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                                 style={{
-                                    backgroundColor: snapshot.isDraggingOver ? 'grey' : 'darkgrey',
-                                    height: snapshot.draggingFromThisWith ? '100%' : '110%'
+                                    backgroundColor: snapshot.isDraggingOver ? 'grey' : 'darkgrey'
                                 }}>
                                 {items.map(({ id, title }, i) => (
-                                    <Item title={title} id={id} key={id} index={i} />
+                                    <Item title={title} id={id} key={id} index={i} columnIndex={columnIndex} />
                                 ))}
-                                <ItemAddBtn index={i} />
+                                <ItemAddBtn index={columnIndex} />
                             </div>
                         )}
                     </Droppable>

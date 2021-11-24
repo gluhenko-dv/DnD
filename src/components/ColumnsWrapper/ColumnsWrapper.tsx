@@ -3,8 +3,9 @@ import { useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { updateBoardData } from '../../store/Board/BoardSlice';
 import './ColumnsWrapper.styles.scss';
-import { IBoardData } from '../../interfaces/interfaces';
+
 import ColumnAddBtn from '../ColumnAddBtn/ColumnAddBtn';
+import { getBoardData } from '../../helpers/helpers';
 
 const mapDispatchToProps = {
     updateBoardData
@@ -17,7 +18,7 @@ const ColumnsWrapper: React.FC<PropsFromRedux> = ({ updateBoardData, children })
     const onDragEnd = useCallback((result) => {
         const { destination, source } = result;
 
-        const data: IBoardData[] = localStorage.boardData ? JSON.parse(localStorage.boardData) : [];
+        const data = getBoardData()
 
         if (!destination || data.length === 0) {
             return;
