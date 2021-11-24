@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { dateNow } from '../../helpers/helpers';
 import { IBoardData } from '../../interfaces/interfaces';
@@ -16,7 +17,7 @@ interface ItemAddBtnProps extends PropsFromRedux {
 }
 
 const ItemAddBtn: React.FC<ItemAddBtnProps> = ({ index, updateBoardData }) => {
-    const onClick = () => {
+    const onClick = useCallback(() => {
         const data: IBoardData[] = localStorage.boardData ? JSON.parse(localStorage.boardData) : [];
         if (data.length === 0) {
             return;
@@ -26,7 +27,7 @@ const ItemAddBtn: React.FC<ItemAddBtnProps> = ({ index, updateBoardData }) => {
             title: 'Новое'
         });
         updateBoardData(data);
-    };
+    }, []);
 
     return (
         <button onClick={onClick} className="item-add-btn">
