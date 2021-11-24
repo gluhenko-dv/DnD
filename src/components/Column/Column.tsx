@@ -10,15 +10,10 @@ interface IColumnProps {
 }
 
 const Column: React.FC<IColumnProps> = ({ data, setData }) => {
-    console.log(data);
-
     const removeColumn = useCallback((e) => {
-        const newData = data;
-        console.log(data);
-
-        console.log(e.target.dataset.index);
-        console.log(newData);
-        setData(newData.splice(e.target.dataset.index, 1));
+        data.splice(e.target.dataset.index, 1);
+        localStorage.startArr = JSON.stringify(data);
+        setData(JSON.parse(localStorage.startArr));
     }, []);
 
     return (
