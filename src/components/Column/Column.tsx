@@ -5,6 +5,7 @@ import { IBoardData } from '../../interfaces/interfaces';
 import { deleteBoardItem } from '../../store/Board/BoardSlice';
 import { RootState } from '../../store/rootReducer';
 import Item from '../Item/Item';
+import ItemAddBtn from '../ItemAddBtn/ItemAddBtn';
 import './Column.styles.scss';
 
 const mapStateToProps = ({ board }: RootState) => ({ board });
@@ -44,6 +45,7 @@ const Column: React.FC<PropsFromRedux> = ({ board, deleteBoardItem }) => {
                                 {items.map(({ id, title }, i) => (
                                     <Item title={title} id={id} key={id} index={i} />
                                 ))}
+                                <ItemAddBtn index={i} />
                             </div>
                         )}
                     </Droppable>
