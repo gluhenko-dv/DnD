@@ -1,11 +1,11 @@
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { updateBoardData } from 'store/Board/BoardSlice';
+import { updateBoardData } from 'src/store/Board/BoardSlice';
 import './ColumnsWrapper.styles.scss';
 
 import ColumnAddBtn from '../ColumnAddBtn/ColumnAddBtn';
-import { getBoardData } from 'helpers/helpers';
+import { getBoardData } from 'src/helpers/helpers';
 
 const mapDispatchToProps = {
     updateBoardData

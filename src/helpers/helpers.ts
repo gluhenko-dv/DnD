@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { IBoardData } from 'interfaces/interfaces';
+import { IBoardData } from 'src/interfaces/interfaces';
 
 export const getBoardData = (): IBoardData[] => (localStorage.boardData ? JSON.parse(localStorage.boardData) : []);
 

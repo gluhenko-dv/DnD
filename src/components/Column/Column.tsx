@@ -1,8 +1,9 @@
 import { useCallback } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { connect, ConnectedProps } from 'react-redux';
-import { deleteBoardItem } from 'store/Board/BoardSlice';
-import { RootState } from 'store/rootReducer';
+import { deleteBoardItem } from 'src/store/Board/BoardSlice';
+import { RootState } from 'src/store/rootReducer';
+
 import EditTitle from '../EditTitle/EditTitle';
 import Item from '../Item/Item';
 import ItemAddBtn from '../ItemAddBtn/ItemAddBtn';

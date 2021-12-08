@@ -1,5 +1,5 @@
 import { Draggable } from 'react-beautiful-dnd';
-import { IBoardItem } from 'interfaces/interfaces';
+import { IBoardItem } from 'src/interfaces/interfaces';
 import EditTitle from '../EditTitle/EditTitle';
 import './Item.styles.scss';
 

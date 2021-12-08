@@ -1,7 +1,7 @@
 import { SyntheticEvent, useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { getBoardData, keydownEnter, onFocusEditable } from 'helpers/helpers';
-import { updateBoardData } from 'store/Board/BoardSlice';
+import { getBoardData, keydownEnter, onFocusEditable } from 'src/helpers/helpers';
+import { updateBoardData } from 'src/store/Board/BoardSlice';
 
 const mapDispatchToProps = {
     updateBoardData
