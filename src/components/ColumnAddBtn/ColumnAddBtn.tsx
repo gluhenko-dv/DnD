@@ -1,34 +1,36 @@
 import { useCallback } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { dateNow, getBoardData } from 'src/helpers/helpers';
-import { updateBoardData } from 'src/store/Board/BoardSlice';
-import './ColumnAddBtn.styles.scss';
+import { dateNow, getBoardData } from 'helpers/helpers';
+import { updateBoardData } from 'store/Board/BoardSlice';
+import useStyles from './ColumnAddBtn.styles';
 
 const mapDispatchToProps = {
-    updateBoardData
+  updateBoardData
 };
 
 const connector = connect(null, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const ColumnAddBtn: React.FC<PropsFromRedux> = ({ updateBoardData }) => {
-    const onClick = useCallback(() => {
-        const data = getBoardData();
+  const classes = useStyles();
 
-        data.splice(data.length, 0, {
-            id: dateNow(),
-            title: 'Новая колонка',
-            items: []
-        });
+  const onClick = useCallback(() => {
+    const data = getBoardData();
 
-        updateBoardData(data);
-    }, []);
+    data.splice(data.length, 0, {
+      id: dateNow(),
+      title: 'Новая колонка',
+      items: []
+    });
 
-    return (
-        <button onClick={onClick} className="column-add-btn">
-            добавить колонку
-        </button>
-    );
+    updateBoardData(data);
+  }, []);
+
+  return (
+    <button onClick={onClick} className={classes.addBtn}>
+      добавить колонку
+    </button>
+  );
 };
 
 export default connector(ColumnAddBtn);
