@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { Button } from '@mui/material';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { connect, ConnectedProps } from 'react-redux';
 import { deleteBoardItem } from 'store/Board/BoardSlice';
@@ -7,6 +8,10 @@ import EditTitle from '../EditTitle/EditTitle';
 import Item from '../Item/Item';
 import ItemAddBtn from '../ItemAddBtn/ItemAddBtn';
 import useStyles from './Column.styles';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import { initialBoardData } from 'initialData';
+import { IBoardData } from 'interfaces/interfaces';
 
 const mapStateToProps = ({ board }: RootState) => ({ board });
 
@@ -22,16 +27,15 @@ const Column: React.FC<PropsFromRedux> = ({ board, deleteBoardItem }) => {
   const removeColumn = useCallback((e) => {
     deleteBoardItem(e.target.dataset.index);
   }, []);
+console.log(board);
 
   return (
     <>
-      {board.data.map(({ id, title, items }, columnIndex) => (
+      {board.data.map(({ id, items, title }, columnIndex) => (
         <div className={classes.column} key={id}>
           <div className={classes.header}>
-            <EditTitle className={classes.title} title={title} index={columnIndex} />
-            <button onClick={removeColumn} data-index={columnIndex}>
-              удалить
-            </button>
+            {title && <EditTitle className={classes.title} title={title} index={columnIndex} />}
+            <DeleteIcon onClick={removeColumn} data-index={columnIndex} />
           </div>
           <Droppable droppableId={`${columnIndex}`}>
             {(provided, snapshot) => (

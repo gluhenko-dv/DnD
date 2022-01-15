@@ -49,10 +49,6 @@ const ColumnsWrapper: React.FC<PropsFromRedux> = ({ updateBoardData, children })
     );
   }, []);
 
-  useEffect(() => {
-    updateBoardData(localStorage.boardData ? JSON.parse(localStorage.boardData) : initialBoardData);
-  }, []);
-
   return (
     <div className={classes.columns}>
       <DragDropContext onDragEnd={onDragEnd}>

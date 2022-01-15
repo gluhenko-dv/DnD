@@ -3,7 +3,8 @@ import { connect, ConnectedProps } from 'react-redux';
 import { dateNow, getBoardData } from 'helpers/helpers';
 import { updateBoardData } from 'store/Board/BoardSlice';
 import useStyles from './ColumnAddBtn.styles';
-
+import { IconButton } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 const mapDispatchToProps = {
   updateBoardData
 };
@@ -15,21 +16,21 @@ const ColumnAddBtn: React.FC<PropsFromRedux> = ({ updateBoardData }) => {
   const classes = useStyles();
 
   const onClick = useCallback(() => {
-    const data = getBoardData();
+    // const data = getBoardData();
 
-    data.splice(data.length, 0, {
-      id: dateNow(),
-      title: 'Новая колонка',
-      items: []
-    });
+    // data.splice(data.atributes.length, 0, {
+    //   id: dateNow(),
+    //   title: 'Новая колонка',
+    //   items: []
+    // });
 
-    updateBoardData(data);
+    // updateBoardData(data);
   }, []);
 
   return (
-    <button onClick={onClick} className={classes.addBtn}>
-      добавить колонку
-    </button>
+    <IconButton color="primary" aria-label="delete" size="large" onClick={onClick} className={classes.addBtn}>
+      <AddCircleIcon fontSize="inherit" />
+    </IconButton>
   );
 };
 

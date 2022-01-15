@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { putBoardDatra } from 'api';
 import { IBoardData, ReduxStatus } from 'interfaces/interfaces';
 
 type NewsState = ReduxStatus & {
@@ -16,6 +17,11 @@ export const deleteBoardItem = createAsyncThunk('board/dalete', async (index: nu
 
 export const updateBoardData = createAsyncThunk('board/update', async (newData: IBoardData[]) => {
   localStorage.boardData = JSON.stringify(newData);
+  const data = {
+    title: 'title',
+    columns: newData
+  };
+  putBoardDatra(data);
   return newData;
 });
 

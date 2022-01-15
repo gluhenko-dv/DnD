@@ -3,6 +3,8 @@ import { connect, ConnectedProps } from 'react-redux';
 import { dateNow, getBoardData } from 'helpers/helpers';
 import { updateBoardData } from 'store/Board/BoardSlice';
 import useStyles from './ItemAddBtn.styles';
+import { IconButton } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const mapDispatchToProps = {
   updateBoardData
@@ -30,9 +32,9 @@ const ItemAddBtn: React.FC<ItemAddBtnProps> = ({ index, updateBoardData }) => {
   }, []);
 
   return (
-    <button onClick={onClick} className={classes.btn}>
-      добавить
-    </button>
+    <IconButton color="primary" aria-label="delete" size="large" onClick={onClick} className={classes.btn}>
+      <AddCircleIcon />
+    </IconButton>
   );
 };
 
